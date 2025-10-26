@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id        String   @id @default(uuid())
+  player1Id String // For now, we'll store a placeholder. Later, this can be a real user ID.
+  player2Id String
+
+  status    GameStatus @default(IN_PROGRESS)
+  moves     String[]   // An array to store every move in algebraic notation
+  board     String     // The board state in FEN notation
+
+  winner    String? // The winner ('white' or 'black')
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum GameStatus {
+  IN_PROGRESS
+  COMPLETED
+}
