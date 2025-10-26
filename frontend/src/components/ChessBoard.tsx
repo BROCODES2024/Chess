@@ -56,15 +56,19 @@ export const ChessBoard = ({
                       );
 
                       setFrom(null);
-                      chess.move({
-                        from,
-                        to: squareRepresentation,
-                      });
-                      setBoard(chess.board());
-                      console.log({
-                        from,
-                        to: squareRepresentation,
-                      });
+                      try {
+                        chess.move({
+                          from,
+                          to: squareRepresentation,
+                        });
+                        setBoard(chess.board());
+                        console.log({
+                          from,
+                          to: squareRepresentation,
+                        });
+                      } catch (e) {
+                        console.log("Invalid move", e);
+                      }
                     }
                   }}
                   key={j}
